@@ -2,8 +2,8 @@
 
 ## TODO
 
-- [ ] Deploy (vercell)
-- [ ] Scaffold and mock data
+- [x] Deploy (vercell)
+- [x] Scaffold and mock data
 - [ ] database (vercel prostgress)
 - [ ] auth (clerk)
 - [ ] image upload
