@@ -6,8 +6,9 @@
 - [x] Scaffold and mock data
 - [x] Tidy up build process
 - [x] database (vercel prostgress)
-- [ ] auth (clerk)
+- [x] auth (clerk)
 - [x] image upload
+- [x] server only rendering
 - [ ] error management (sentry)
 - [ ] parallel route
 - [ ] delete button
