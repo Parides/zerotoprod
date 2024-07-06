@@ -7,7 +7,7 @@
 - [x] Tidy up build process
 - [x] database (vercel prostgress)
 - [ ] auth (clerk)
-- [ ] image upload
+- [x] image upload
 - [ ] error management (sentry)
 - [ ] parallel route
 - [ ] delete button
