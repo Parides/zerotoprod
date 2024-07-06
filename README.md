@@ -8,9 +8,10 @@
 - [x] database (vercel prostgress)
 - [x] auth (clerk)
 - [x] image upload
-- [x] server only rendering
+- [ ] server only rendering (taint)
+- [ ] use next/image component
 - [ ] error management (sentry)
 - [ ] parallel route
 - [ ] delete button
 - [ ] analytics (posthog)
-- [ ] retelemiting
+- [ ] retelemiting (upstash)

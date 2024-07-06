@@ -2,8 +2,12 @@ import "~/styles/globals.css";
 
 import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
-import { ClerkLoaded, ClerkLoading, ClerkProvider, SignedIn, SignedOut, SignInButton } from "@clerk/nextjs";
+import { ClerkProvider } from "@clerk/nextjs";
 import TopNav from "./_components/topnav";
+import "@uploadthing/react/styles.css";
+import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
+import { extractRouterConfig } from "uploadthing/server";
+import { ourFileRouter } from "./api/uploadthing/core";
 
 export const metadata: Metadata = {
   title: "zerotoprod",
@@ -17,14 +21,10 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en" className={`${GeistSans.variable} flex flex-col gap-4`}>
+        <NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
         <body>
-          <SignedIn>
-            <TopNav />
-            {children}
-          </SignedIn>
-          <SignedOut>
-            <SignInButton></SignInButton>
-          </SignedOut>
+          <TopNav />
+          {children}
         </body>
       </html>
     </ClerkProvider>
