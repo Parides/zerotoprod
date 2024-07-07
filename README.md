@@ -10,8 +10,8 @@
 - [x] image upload
 - [x] server only rendering (taint)
 - [x] use next/image component
-- [ ] error management (sentry)
-- [ ] parallel route
+- [x] error management (sentry)
+- [x] parallel route
 - [ ] delete button
 - [ ] analytics (posthog)
 - [ ] retelemiting (upstash)
