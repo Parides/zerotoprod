@@ -1,7 +1,8 @@
 import React from "react";
-import { getImage } from "~/server/queries";
+import { Modal } from "./modal";
+import FullPageImageView from "~/app/components/full-image-page";
 
-export default async function PhotoModal({
+export default function PhotoModal({
   params: { id: photoId },
 }: {
   params: { id: string };
@@ -9,11 +10,9 @@ export default async function PhotoModal({
   const idAsNumber = parseInt(photoId);
   if (isNaN(idAsNumber)) throw new Error("Invalid ID");
 
-  const iamge = await getImage(idAsNumber);
   return (
-    <dialog open className="backdrop-blur-sm">
-      <h1>{iamge.name}</h1>
-      <img src={iamge.url} className="w-96" />
-    </dialog>
+    <Modal>
+      <FullPageImageView id={idAsNumber} />
+    </Modal>
   );
 }
