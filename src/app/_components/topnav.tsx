@@ -8,7 +8,7 @@ export default function TopNav() {
   const router = useRouter();
 
   return (
-    <nav className="mb-4 flex w-full items-center justify-between border-b p-4 text-xl font-semibold">
+    <nav className="mb-4 flex w-full items-center justify-between border-b p-4 text-xl font-semibold h-24">
       <div>Gallery</div>
       <div className="flex flex-row gap-4">
         <SignedOut>
