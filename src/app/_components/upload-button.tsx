@@ -97,6 +97,15 @@ function UploadButton() {
       });
       router.refresh();
     },
+    onUploadError: (error) => {
+      posthog.capture("upload_error", { error: error.message });
+      toast.dismiss("upload-begin");
+      toast.error(error.message, {
+        duration: 6000,
+        id: "upload-error",
+      });
+      router.refresh();
+    },
   });
 
   return (
