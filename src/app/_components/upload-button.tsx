@@ -78,14 +78,14 @@ function UploadButton() {
 
   const { inputProps } = useUploadThingInputProps("imageUploader", {
     onUploadBegin: () => {
-      posthog.capture("upload-begin");
+      posthog.capture("upload_begin");
       toast.info("Uploading...", {
         duration: 10000,
         id: "upload-begin",
         icon: (
           <div>
             <LoadingSpinner />
-          </div>
+          </div> 
         ),
       });
     },
