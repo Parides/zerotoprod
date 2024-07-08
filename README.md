@@ -12,6 +12,7 @@
 - [x] use next/image component
 - [x] error management (sentry)
 - [x] parallel route
+- [x] toast notifications
 - [ ] delete button
 - [ ] analytics (posthog)
 - [ ] retelemiting (upstash)

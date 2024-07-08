@@ -22,7 +22,7 @@ async function Images() {
               height={165}
             />
           </Link>
-          <div className="break-all text-sm">{image.name}</div>
+          <div className="overflow-clip text-xs">{image.name}</div>
         </div>
       ))}
     </div>
