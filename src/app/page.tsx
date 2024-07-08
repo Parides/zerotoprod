@@ -34,7 +34,9 @@ export default async function HomePage() {
       <SignedOut>
         <div className="h-full w-full text-center text-2xl">Please Sign In</div>
       </SignedOut>
-      <SignedIn>{Images()}</SignedIn>
+      <SignedIn>
+        <Images />
+      </SignedIn>
     </main>
   );
 }

@@ -1,10 +1,10 @@
 import "server-only";
 import { db } from "./db";
-import { auth } from "@clerk/nextjs/server";
 import { images } from "./db/schema";
 import { and, eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
 import analyticsServerClient from "./analytics";
+import { auth } from "@clerk/nextjs/server";
 
 export async function getUserImages() {
   const user = auth();
