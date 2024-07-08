@@ -4,7 +4,6 @@ import { auth } from "@clerk/nextjs/server";
 import { images } from "./db/schema";
 import { and, eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
-import serverSideAnalytics from "./analytics";
 import analyticsServerClient from "./analytics";
 
 export async function getUserImages() {
