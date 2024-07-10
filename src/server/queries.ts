@@ -4,7 +4,7 @@ import { images } from "./db/schema";
 import { and, eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
 import analyticsServerClient from "./analytics";
-import { auth } from "@clerk/nextjs/server";
+import { auth, clerkClient } from "@clerk/nextjs/server";
 
 export async function getUserImages() {
   const user = auth();
@@ -52,4 +52,19 @@ export async function deleteImage(id: number) {
     },
   });
   redirect("/");
+}
+
+export async function getUserName() {
+  const clerkUser = await clerkClient.users.getUser(auth().userId!);
+
+  if (!clerkUser.firstName || !clerkUser.lastName)
+    throw new Error("Unauthorized");
+
+  return `${clerkUser.firstName[0]} ${clerkUser.lastName[0]}`;
+}
+
+export async function getClerkUserImage() {
+  const clerkUser = await clerkClient.users.getUser(auth().userId!);
+
+  return clerkUser.imageUrl;
 }

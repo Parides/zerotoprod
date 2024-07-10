@@ -9,7 +9,8 @@ import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { extractRouterConfig } from "uploadthing/server";
 import { ourFileRouter } from "./api/uploadthing/core";
 import { Toaster } from "~/components/ui/sonner";
-import { CSPostHogProvider } from './_analytics/provider';
+import { CSPostHogProvider } from "./_analytics/provider";
+import { dark } from "@clerk/themes";
 
 export const metadata: Metadata = {
   title: "zerotoprod",
@@ -19,20 +20,24 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children: children,
-  modal: modal,
+  drawer: drawer,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <ClerkProvider>
+    <ClerkProvider appearance={{ baseTheme: [dark] }}>
       <CSPostHogProvider>
         <html lang="en" className={`${GeistSans.variable} dark`}>
           <NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
-          <body>
-            <div className="grid h-screen grid-rows-[auto,1fr]">
-              <TopNav />
+          <body className="">
+            {/* <div className="grid h-screen grid-rows-[auto,1fr]"> */}
+            <TopNav />
+            {drawer}
+            <div>
               <main className="overflow-y-scroll">{children}</main>
             </div>
-            {modal}
-            <div id="modal-root" />
+            {/* </div> */}
+            {/* {modal} */}
+            {/* <div id="modal-root" /> */}
+            {/* <div id="drawer-root" /> */}
             <Toaster />
           </body>
         </html>

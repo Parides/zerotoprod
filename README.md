@@ -13,6 +13,8 @@
 - [x] error management (sentry)
 - [x] parallel route
 - [x] toast notifications
-- [ ] delete button
-- [ ] analytics (posthog)
-- [ ] retelemiting (upstash)
+- [x] delete button
+- [x] analytics (posthog)
+- [x] retelemiting (upstash)
+- [x] drawer for image
+- [x] fix image grid
