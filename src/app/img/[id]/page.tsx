@@ -1,5 +1,4 @@
 import React from "react";
-import { Modal } from "~/app/@modal/(.)img/[id]/modal";
 import FullPageImageView from "~/app/components/full-image-page";
 
 export default function PhotoPage({

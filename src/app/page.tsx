@@ -1,39 +1,16 @@
 import { SignedIn, SignedOut } from "@clerk/nextjs";
-import Image from "next/image";
-import Link from "next/link";
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
-} from "~/components/ui/drawer";
-import { getUserImages } from "~/server/queries";
+import { getUserImagesLimit } from "~/server/queries";
+import ImageCard from "./components/image-card";
 
 export const dynamic = "force-dynamic";
 
 async function Images() {
-  const images = await getUserImages();
+  const images = await getUserImagesLimit(0, 10);
 
   return (
-    <div className="flex flex-1 items-center justify-center">
-      <div className="grid grid-cols-2 grid-rows-[auto,1fr] gap-1 md:grid-cols-4 lg:grid-cols-5">
-        {/* <div className="flex flex-wrap justify-center gap-4 p-4"> */}
-        {[...images].map((image) => (
-          <div key={image.id} className="relative flex h-48 w-48 flex-col">
-            <Link href={`/img/${image.id}`}>
-              <Image
-                src={image.url}
-                alt={image.name}
-                style={{ objectFit: "cover" }}
-                fill
-              />
-            </Link>
-          </div>
-        ))}
+    <div className="flex w-full flex-grow flex-col items-center justify-center">
+      <div className="top-16 columns-2 gap-1 space-y-1 p-1 md:columns-4 lg:max-w-[70vw] lg:columns-5">
+        <ImageCard images={images}></ImageCard>
       </div>
     </div>
   );
@@ -47,7 +24,7 @@ async function MainPage() {
           <img
             src="https://utfs.io/f/eed5e505-a307-464a-83d4-c6705bb8b2d9-5nw9l7.png"
             alt="logo"
-            className="h-24 w-24"
+            className="h-24 w-24 invert dark:invert-0"
           />
         </div>
         <div className="flex flex-col items-start justify-center">
@@ -66,13 +43,13 @@ async function MainPage() {
 }
 export default async function HomePage() {
   return (
-    <main className="">
+    <>
       <SignedOut>
         <MainPage />
       </SignedOut>
       <SignedIn>
         <Images />
       </SignedIn>
-    </main>
+    </>
   );
 }

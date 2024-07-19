@@ -9,20 +9,25 @@ export default async function FullPageImageView(props: { id: number }) {
   const uploaderInfo = await clerkClient.users.getUser(image.userId);
 
   return (
-    <div className="flex h-full w-full min-w-0">
-      <div className="flex flex-shrink items-center justify-center">
-        <img src={image.url} className="flex-shrink object-contain" />
+    <div className="flex flex-col lg:flex-row !h-full items-stretch">
+      <div className="flex flex-1 items-center justify-center p-2">
+        <img src={image.url} className="max-h-[50vh]" />
       </div>
 
-      <div className="flex w-48 flex-1 flex-shrink-0 flex-col border-l">
-        <div className="border-b p-2 text-center text-lg">{image.name}</div>
-        <div className="flex flex-col p-2">
-          <span>Uploaded By</span>
-          <span>{uploaderInfo.fullName}</span>
+      <div className="flex min-w-[25vw] flex-1 flex-shrink-0 flex-col break-all border-l">
+        <div
+          className="truncate border-b p-2 text-center text-lg"
+          title={image.name}
+        >
+          {image.name}
         </div>
         <div className="flex flex-col p-2">
-          <span>Created On</span>
-          <span>{new Date(image.createdAt).toLocaleDateString()}</span>
+          <span>Uploaded By: {uploaderInfo.fullName}</span>
+        </div>
+        <div className="flex flex-grow p-2">
+          <span>
+            Created On: {new Date(image.createdAt).toLocaleDateString()}
+          </span>
         </div>
         <div className="flex flex-col p-2">
           <form
@@ -31,7 +36,7 @@ export default async function FullPageImageView(props: { id: number }) {
               await deleteImage(image.id);
             }}
           >
-            <Button type="submit" variant="destructive">
+            <Button type="submit" className="w-full" variant="destructive">
               Delete
             </Button>
           </form>

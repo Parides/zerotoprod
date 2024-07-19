@@ -11,6 +11,8 @@ import { ourFileRouter } from "./api/uploadthing/core";
 import { Toaster } from "~/components/ui/sonner";
 import { CSPostHogProvider } from "./_analytics/provider";
 import { dark } from "@clerk/themes";
+import BottomNav from "./_components/bottomnav";
+import { ThemeProvider, useTheme } from "next-themes";
 
 export const metadata: Metadata = {
   title: "zerotoprod",
@@ -23,22 +25,25 @@ export default function RootLayout({
   drawer: drawer,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <ClerkProvider appearance={{ baseTheme: [dark] }}>
+    <ClerkProvider appearance={{ baseTheme: dark }}>
       <CSPostHogProvider>
-        <html lang="en" className={`${GeistSans.variable} dark`}>
+        <html lang="en" className={`${GeistSans.variable}`}>
           <NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
-          <body className="">
-            {/* <div className="grid h-screen grid-rows-[auto,1fr]"> */}
-            <TopNav />
-            {drawer}
-            <div>
-              <main className="overflow-y-scroll">{children}</main>
-            </div>
-            {/* </div> */}
-            {/* {modal} */}
-            {/* <div id="modal-root" /> */}
-            {/* <div id="drawer-root" /> */}
-            <Toaster />
+          <body className="antialiased">
+            <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+              {/* <div className="grid h-screen grid-rows-[auto,1fr]"> */}
+              <TopNav />
+              <main className="flex items-center justify-center">
+                {children}
+              </main>
+              {drawer}
+              {/* </div> */}
+              {/* {modal} */}
+              {/* <div id="modal-root" /> */}
+              {/* <div id="drawer-root" /> */}
+              <Toaster />
+              <BottomNav />
+            </ThemeProvider>
           </body>
         </html>
       </CSPostHogProvider>

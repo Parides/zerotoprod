@@ -1,10 +1,29 @@
-import "server-only";
+"use server";
 import { db } from "./db";
 import { images } from "./db/schema";
 import { and, eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
 import analyticsServerClient from "./analytics";
 import { auth, clerkClient } from "@clerk/nextjs/server";
+
+export async function getUserImagesLimit(skip: number, fetch: number) {
+  const user = auth();
+
+  if (!user.userId) throw new Error("Unauthorized");
+
+  const images = await db.query.images.findMany({
+    where: (model, { eq }) => eq(model.userId, user.userId),
+    orderBy: (model, { desc }) => desc(model.id),
+    offset: skip,
+    limit: fetch,
+  });
+
+  return images;
+}
+
+export async function artificalDelay() {
+  await new Promise(f => setTimeout(f, 100000));
+}
 
 export async function getUserImages() {
   const user = auth();

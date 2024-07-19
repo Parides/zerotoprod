@@ -15,18 +15,21 @@ const coreConfig = {
     eslint: {
         ignoreDuringBuilds: true,
     },
+
     async rewrites() {
         return [
             {
                 source: "/ingest/static/:path*",
-                destination: "https://us-assets.i.posthog.com/static/:path*",
+                destination: "https://eu-assets.i.posthog.com/static/:path*",
             },
             {
                 source: "/ingest/:path*",
-                destination: "https://us.i.posthog.com/:path*",
+                destination: "https://eu.i.posthog.com/:path*",
             },
         ];
     },
+    trailingSlash: true,
+    skipTrailingSlashRedirect: true, 
 };
 
 // Injected content via Sentry wizard below

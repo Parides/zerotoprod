@@ -12,6 +12,6 @@ export default async function PhotoDrawer({
   const image = await getImage(idAsNumber);
 
   return (
-    <CustomDrawer children={undefined} photoName={image.name} photoUrl={image.url} photoId={image.id.toString()} />
+    <CustomDrawer photoName={image.name} photoUrl={image.url} photoId={image.id.toString()} />
   );
 }

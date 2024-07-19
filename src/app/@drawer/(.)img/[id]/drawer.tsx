@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { ElementRef, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 // import { Drawer } from "~/components/ui/drawer";
 import {
@@ -11,42 +11,40 @@ import {
   DrawerFooter,
   DrawerHeader,
   DrawerTitle,
-  DrawerTrigger,
 } from "~/components/ui/drawer";
 import Image from "next/image";
 import { Button } from "~/components/ui/button";
 
 export function CustomDrawer({
-  children,
   photoName,
   photoUrl,
   photoId,
 }: {
-  children: React.ReactNode;
   photoName: string;
   photoUrl: string;
   photoId: string;
 }) {
   const router = useRouter();
   const [isOpen, setIsOpen] = React.useState(true);
+  const dialogRef = useRef<ElementRef<"dialog">>(null);
 
-  // useEffect(() => {
-  //   if (isOpen) {
-  //     router.push(`/img/${photoId}`);
-  //   }
-  // }, [isOpen]);
+  useEffect(() => {
+    if (!isOpen) {
+      router.back();
+    }
+  }, [isOpen]);
 
   function onDismiss() {
-    router.push("/");
-    router.refresh();
+    setIsOpen(false);
+    // router.back();
   }
 
   return (
     <Drawer
       open={isOpen}
-      onOpenChange={setIsOpen}
-      onClose={onDismiss}
       key={photoId}
+      onClose={onDismiss}
+      onOpenChange={setIsOpen}
     >
       <DrawerContent>
         <DrawerHeader>
@@ -55,17 +53,22 @@ export function CustomDrawer({
         </DrawerHeader>
         <div className="flex flex-col items-center justify-center">
           <Image
+            className="rounded-md"
             src={photoUrl}
             alt={photoName}
             style={{ objectFit: "cover" }}
-            width={480}
-            height={480}
+            width={250}
+            height={250}
           />
         </div>
         <DrawerFooter>
-          {/* // <Button>Submit</Button> */}
-          <DrawerClose className="flex">
-            <Button className="w-full" variant="link">
+          {/* <Button onClick={() => router}>Submit</Button> */}
+          <DrawerClose className="flex" asChild>
+            <Button
+              className="w-full"
+              variant="link"
+              onClick={() => onDismiss()}
+            >
               Close
             </Button>
           </DrawerClose>

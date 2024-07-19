@@ -37,3 +37,5 @@ export const images = createTable(
     urlIndex: index("url_idx").on(example.url),
   }),
 );
+
+export type Image = typeof images.$inferSelect;
